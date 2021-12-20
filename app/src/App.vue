@@ -24,32 +24,17 @@ declare global {
 }
 
 @Component
-export default class MetamaskConnection extends Vue {
+export default class ConnectProvider extends Vue {
   @Prop() private msg!: string;
   private status = false;
   // request access to the user's MetaMask account
-  mounted(): void {
-    if (window.ethereum?.request) {
-      // connect to metamask
-      window.ethereum
-        .request({ method: "eth_requestAccounts" })
-        .then((result: Array<string>) => {
-          this.$store.state.provider = new ethers.providers.Web3Provider(
-            window.ethereum
-          );
-          this.status = true;
-          this.$store.state.walletAccount = result[0];
-        })
-        .catch((error: any): void => {
-          console.error(error);
-          alert("Please install MetaMask browser extension");
-        });
-    } else {
-      alert(
-        "Missing install Metamask. Please access https://metamask.io/ to install extension on your browser"
-      );
+  async mounted(): Promise<void> {
+    const provider = new ethers.providers.JsonRpcProvider();
+    const signer = provider.getSigner();
+    this.$store.state.provider = provider;
+    this.status = true;
+    this.$store.state.walletAccount = await signer.getAddress();
     }
-  }
 }
 </script>
 

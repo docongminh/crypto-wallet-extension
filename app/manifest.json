@@ -1,0 +1,9 @@
+{
+    "name": "Crypto wallet",
+    "description": "example crypto transfer token erc20",
+    "version": "0.1.0",
+    "manifest_version": 2,
+    "browser_action": {
+        "default_popup": "index.html"
+    }
+}

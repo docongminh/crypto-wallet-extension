@@ -64,6 +64,7 @@ export default class Erc20Token extends Vue {
         this.addrCheck
       );
       console.log(`balance: ${utils.formatUnits(balance.toString())}`);
+      alert(`balance: ${utils.formatUnits(balance.toString())}`);
     } else {
       alert("[ERROR] Address to get balance is empty !");
     }
@@ -88,6 +89,12 @@ export default class Erc20Token extends Vue {
         this.$store.state.walletAccount
       );
       console.log(
+        `New Contract: ${name} - ${symbol} - ${decimal} - ${utils.formatUnits(
+          balance.toString()
+        )}`
+      );
+      //
+      alert(
         `New Contract: ${name} - ${symbol} - ${decimal} - ${utils.formatUnits(
           balance.toString()
         )}`
